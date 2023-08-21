@@ -1,0 +1,24 @@
+body {
+    background-color: rgb(6, 168, 114);
+}
+.navbar-nav a{
+    margin-right: 140px;
+    margin-left: 140px;
+}
+
+
+.centered-container {
+    margin-top: -25rem !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+.chrono {
+    display: none;
+    font-size: 90px;
+}
+#returnTimeText {
+    font-size: 90px;
+    
+}
