@@ -22,3 +22,57 @@ body {
     font-size: 90px;
     
 }
+
+@media (max-width: 1440px) {
+    body {
+        height: 100vh;
+    }
+    .navbar {
+        text-align: center;
+    }
+    .navbar a {
+        /* Adjust your navbar link styles for screens up to 1440px here */
+        font-size: 14px;
+        margin: 8px;
+    }
+    .centered-container {
+        /* Adjust your centered-container styles for screens up to 1440px here */
+        margin-top: 10px;
+    }
+    .form-outline {
+        /* Adjust your form-outline styles for screens up to 1440px here */
+        width: 50%;
+    }
+    .compteur {
+        /* Adjust your compteur styles for screens up to 1440px here */
+    }
+    .chrono {
+        /* Adjust your chrono styles for screens up to 1440px here */
+        font-size: 1.5rem;
+    }
+    .parag {
+        /* Adjust your parag styles for screens up to 1440px here */
+    }
+    #time {
+        margin-top: 3rem;
+    }
+
+}
+@media (max-width: 425px) {
+    #typeText {
+        font-size: 10px;
+    }
+    #returnTimeText {
+        font-size: 20px;
+    }
+}
+@media (max-width: 768px) {
+    .compteur {
+        margin-top: -5rem;
+    }
+}
+@media (max-width: 375px) {
+    #typeText {
+        font-size: 8px;
+    }
+}
