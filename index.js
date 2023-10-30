@@ -7,37 +7,37 @@ nav.insertAdjacentElement('afterend', hrElement);
 
 const chronoElement = document.querySelector('.chrono');
 const returnTimeTextElement = document.getElementById('returnTimeText');
-// Initialise la variable pour le temps restant à 20 secondes
 let remainingTime = 20;
-let countDown;// Variable pour stocker l'ID de l'intervalle de compte à rebours
-displayTime(remainingTime);// Affiche le temps initial dans l'élément chrono
+let countDown;
+displayTime(remainingTime);
 const navLinks = document.querySelectorAll('.navbar a');
+
 // Ajoute un écouteur d'événements à chaque lien de navigation
 navLinks.forEach(link => {
     link.addEventListener('click', function (event) {
         event.preventDefault();
         // Map associant les ID de liens à des temps en secondes
         const timeMap = {
+            nl1: 20,   // Temps par défaut
             nl2: 300,
             nl3: 900,
             nl4: 1200,
             nl5: 1800
         };
 
-        // Obtient le temps à partir de la map ou utilise 20 secondes par défaut
-        remainingTime = timeMap[link.id] || 20;
-        clearInterval(countDown);        // Arrête le compte à rebours actuel
-        startCountDown();        // Démarre un nouveau compte à rebours
-        // Calcule l'heure de retour
+        const newTime = timeMap[link.id] || 20; // Utilise le temps par défaut si l'ID n'est pas trouvé
+        if (countDown) {
+            clearInterval(countDown); // Arrête le compte à rebours actuel
+        }
+        remainingTime = newTime; // Définit le nouveau temps
+        startCountDown(); // Démarre un nouveau compte à rebours
         const currentTime = new Date();
         const returnTime = new Date(currentTime.getTime() + remainingTime * 1000);
-        // Obtient les heures et les minutes pour l'heure de retour
         const returnHours = returnTime.getHours();
         const returnMinutes = returnTime.getMinutes();
         const returnTimeText = `Be back at ${returnHours < 10 ? '0' : ''}${returnHours}:${returnMinutes < 10 ? '0' : ''}${returnMinutes}`;
-        // Met à jour le texte d'heure de retour
         returnTimeTextElement.textContent = returnTimeText;
-        chronoElement.style.display = 'block';        // Affiche le compteur après le clic sur un lien
+        chronoElement.style.display = 'block';
     });
 });
 
@@ -54,7 +54,16 @@ function startCountDown() {
             clearInterval(countDown);
         }
     }, 1000);
+
+    // Calcule l'heure de retour au démarrage du compte à rebours
+    const currentTime = new Date();
+    const returnTime = new Date(currentTime.getTime() + remainingTime * 1000);
+    const returnHours = returnTime.getHours();
+    const returnMinutes = returnTime.getMinutes();
+    const returnTimeText = `Be back at ${returnHours < 10 ? '0' : ''}${returnHours}:${returnMinutes < 10 ? '0' : ''}${returnMinutes}`;
+    returnTimeTextElement.textContent = returnTimeText;
 }
+
 
 // Fonction pour afficher le temps au format HH:MM:SS
 function displayTime(seconds) {
@@ -84,6 +93,7 @@ const customTimeInput = document.getElementById('typeText');
 customTimeInput.addEventListener('keyup', function (event) {
     if (event.key === 'Enter') {
         // Convertit l'entrée en minutes personnalisées en secondes
+        chronoElement.style.display = 'block';        
         const customMinutes = parseInt(customTimeInput.value);
         if (!isNaN(customMinutes) && customMinutes > 0) {
             const customTimeInSeconds = customMinutes * 60;
