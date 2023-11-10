@@ -24,7 +24,6 @@ navLinks.forEach(link => {
             nl4: 1200,
             nl5: 1800
         };
-
         const newTime = timeMap[link.id] || 20; // Utilise le temps par défaut si l'ID n'est pas trouvé
         if (countDown) {
             clearInterval(countDown); // Arrête le compte à rebours actuel
@@ -54,7 +53,6 @@ function startCountDown() {
             clearInterval(countDown);
         }
     }, 1000);
-
     // Calcule l'heure de retour au démarrage du compte à rebours
     const currentTime = new Date();
     const returnTime = new Date(currentTime.getTime() + remainingTime * 1000);
@@ -64,13 +62,11 @@ function startCountDown() {
     returnTimeTextElement.textContent = returnTimeText;
 }
 
-
 // Fonction pour afficher le temps au format HH:MM:SS
 function displayTime(seconds) {
     const hours = Math.floor(seconds / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
     const secs = Math.floor(seconds % 60);
-
     // Affiche le temps formaté dans l'élément chrono
     chronoElement.innerHTML = `${hours < 10 ? '0' : ''}${hours}:${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
 }
@@ -82,12 +78,12 @@ function endTime() {
     const returnHours = returnTime.getHours();
     const returnMinutes = returnTime.getMinutes();
     const returnTimeText = `Be back at ${returnHours < 10 ? '0' : ''}${returnHours}:${returnMinutes < 10 ? '0' : ''}${returnMinutes}`;
-
     // Met à jour le texte d'heure de retour
     returnTimeTextElement.textContent = returnTimeText;
 }
 
 const customTimeInput = document.getElementById('typeText');
+const message_erreur = document.getElementById('neg');
 
 // Ajoute un écouteur d'événements pour la touche "Enter" dans la saisie personnalisée
 customTimeInput.addEventListener('keyup', function (event) {
@@ -98,10 +94,15 @@ customTimeInput.addEventListener('keyup', function (event) {
         if (!isNaN(customMinutes) && customMinutes > 0) {
             const customTimeInSeconds = customMinutes * 60;
             remainingTime = customTimeInSeconds;
-
             // Arrête le compte à rebours actuel et en démarre un nouveau
             clearInterval(countDown);
             startCountDown();
+        } else {
+            chronoElement.style.display = 'none';  
+            message_erreur.style.display = 'block';
+            setTimeout(function () {
+                message_erreur.style.display = 'none';
+            }, 5000); 
         }
     }
 });
@@ -110,9 +111,3 @@ customTimeInput.addEventListener('keyup', function (event) {
 
 
 
-
-
-
-// const birthday = new Date(1994, 9, 29);
-// const copy = new Date();
-// copy.getTime(birthday.getTime());

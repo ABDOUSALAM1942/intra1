@@ -5,7 +5,12 @@ body {
     margin-right: 140px;
     margin-left: 140px;
 }
-
+#neg {
+    color: red;
+    border: 1px solid yellow;
+    background-color: aliceblue;
+    margin-top: 1rem;
+}
 
 .centered-container {
     margin-top: -25rem !important;
